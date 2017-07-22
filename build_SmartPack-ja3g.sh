@@ -25,7 +25,6 @@ cp scripts/mkcompile_h release_SmartPack/
 sed "s/\`echo \$LINUX_COMPILE_BY | \$UTS_TRUNCATE\`/SmartPack-Kernel-ja3g-[sunilpaulmathew/g" -i scripts/mkcompile_h
 sed "s/\`echo \$LINUX_COMPILE_HOST | \$UTS_TRUNCATE\`/xda-developers.com]/g" -i scripts/mkcompile_h
 
-
 echo -e $COLOR_GREEN"\n building Smartpack kernel for ja3g\n"$COLOR_NEUTRAL
 
 mkdir output_eur
