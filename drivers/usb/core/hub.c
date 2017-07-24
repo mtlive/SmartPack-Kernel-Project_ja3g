@@ -1448,7 +1448,6 @@ static int hub_probe(struct usb_interface *intf, const struct usb_device_id *id)
 		if (drv->bus_suspend && drv->bus_resume)
 			usb_enable_autosuspend(hdev);
 	}
->>>>>>> v3.4.93
 
 	if (hdev->level == MAX_TOPO_LEVEL) {
 		dev_err(&intf->dev,
