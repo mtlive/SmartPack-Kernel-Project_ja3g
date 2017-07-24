@@ -2569,8 +2569,9 @@ do_addr_param:
 
 		addr_param = param.v + sizeof(sctp_addip_param_t);
 
-		af = sctp_get_af_specific(param_type2af(param.p->type));
+		af = sctp_get_af_specific(param_type2af(addr_param->p.type));
 		if (af == NULL)
+
 			break;
 
 		af->from_addr_param(&addr, addr_param,
