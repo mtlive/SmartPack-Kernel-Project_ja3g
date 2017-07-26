@@ -113,9 +113,6 @@ static struct nlmsg_perm nlmsg_xfrm_perms[] =
 
 static struct nlmsg_perm nlmsg_audit_perms[] =
 {
-
-static struct nlmsg_perm nlmsg_audit_perms[] =
-{
 	{ AUDIT_GET,		NETLINK_AUDIT_SOCKET__NLMSG_READ     },
 	{ AUDIT_SET,		NETLINK_AUDIT_SOCKET__NLMSG_WRITE    },
 	{ AUDIT_LIST,		NETLINK_AUDIT_SOCKET__NLMSG_READPRIV },
