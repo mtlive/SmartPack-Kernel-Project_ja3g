@@ -397,6 +397,4 @@ void __init files_init(unsigned long mempages)
 	files_stat.max_files = max_t(unsigned long, n, NR_FILE);
 	files_defer_init();
 	percpu_counter_init(&nr_files, 0);
-} 
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help 
+}
