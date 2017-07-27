@@ -41,7 +41,7 @@ cd jalte/ && perl mkboot skt/ ../recovery-zip_SmartPack/boot.img
 
 echo -e $COLOR_GREEN"\n Making recovery flashable zip for LineageOS -jalteskt\n"$COLOR_NEUTRAL
 
-cd ../recovery-zip_SmartPack/ && zip -r9 SmartPack_kernel-LOS_jalteskt_beta_$(date +"%Y%m%d").zip * && mv SmartPack_* ../release_SmartPack/ && rm boot.img
+cd ../recovery-zip_SmartPack/ && zip -r9 SmartPack_kernel-LOS_jalteskt-oc_beta_$(date +"%Y%m%d").zip * && mv SmartPack_* ../release_SmartPack/ && rm boot.img
 
 echo -e $COLOR_GREEN"\n Cleaning\n"$COLOR_NEUTRAL
 

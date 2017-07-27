@@ -41,7 +41,7 @@ cd ja3g/ && perl mkboot LOS/ ../recovery-zip_SmartPack/boot.img
 
 echo -e $COLOR_GREEN"\n Making recovery flashable zip for LineageOS -ja3g\n"$COLOR_NEUTRAL
 
-cd ../recovery-zip_SmartPack/ && zip -r9 SmartPack_kernel-LOS_ja3g_beta_$(date +"%Y%m%d").zip * && mv SmartPack_* ../release_SmartPack/ && rm boot.img
+cd ../recovery-zip_SmartPack/ && zip -r9 SmartPack_kernel-LOS_ja3g-oc_beta_$(date +"%Y%m%d").zip * && mv SmartPack_* ../release_SmartPack/ && rm boot.img
 
 echo -e $COLOR_GREEN"\n Generating boot.img\n"$COLOR_NEUTRAL
 
@@ -49,7 +49,7 @@ cd ../ja3g/ && perl mkboot RR/ ../recovery-zip_SmartPack/boot.img
 
 echo -e $COLOR_GREEN"\n Making recovery flashable zip for RR -ja3g\n"$COLOR_NEUTRAL
 
-cd ../recovery-zip_SmartPack/ && zip -r9 SmartPack_kernel-RR_ja3g_beta_$(date +"%Y%m%d").zip * && mv SmartPack_* ../release_SmartPack/ && rm boot.img
+cd ../recovery-zip_SmartPack/ && zip -r9 SmartPack_kernel-RR_ja3g-oc_beta_$(date +"%Y%m%d").zip * && mv SmartPack_* ../release_SmartPack/ && rm boot.img
 
 echo -e $COLOR_GREEN"\n Cleaning\n"$COLOR_NEUTRAL
 
