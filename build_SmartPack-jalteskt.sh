@@ -47,6 +47,22 @@ echo -e $COLOR_GREEN"\n Cleaning\n"$COLOR_NEUTRAL
 
 cd .. && rm jalte/skt/kernel
 
+echo -e $COLOR_GREEN"\n Copying zImage to generate boot.img\n"$COLOR_NEUTRAL
+
+cp output_skt/arch/arm/boot/zImage jalte/skt_rr/kernel
+
+echo -e $COLOR_GREEN"\n Generating boot.img\n"$COLOR_NEUTRAL
+
+cd jalte/ && perl mkboot skt_rr/ ../recovery-zip_SmartPack/boot.img
+
+echo -e $COLOR_GREEN"\n Making recovery flashable zip for Resurrection Remix-OS -jalteskt\n"$COLOR_NEUTRAL
+
+cd ../recovery-zip_SmartPack/ && zip -r9 SmartPack_kernel-RR_jalteskt-oc_beta_$(date +"%Y%m%d").zip * && mv SmartPack_* ../release_SmartPack/ && rm boot.img
+
+echo -e $COLOR_GREEN"\n Cleaning\n"$COLOR_NEUTRAL
+
+cd .. && rm jalte/skt_rr/kernel
+
 # restoring backups
 
 mv release_SmartPack/mkcompile_h scripts/
