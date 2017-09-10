@@ -572,10 +572,6 @@ static int exynos5_mif_busfreq_target(struct device *dev,
 
 	/* get available opp information */
 	rcu_read_lock();
-#ifdef CONFIG_ASV_MARGIN_TEST
-	if (set_mif_freq > 0)
-		*_freq = set_mif_freq;
-#endif
 	opp = devfreq_recommended_opp(dev, _freq, flags);
 	if (IS_ERR(opp)) {
 		rcu_read_unlock();
