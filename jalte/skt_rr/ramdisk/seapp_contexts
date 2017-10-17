@@ -11,4 +11,3 @@ user=_app isAutoPlayApp=true domain=autoplay_app type=autoplay_data_file levelFr
 user=_app isPrivApp=true domain=priv_app type=app_data_file levelFrom=user
 user=_app domain=untrusted_app type=app_data_file levelFrom=user
 user=system isPrivApp=true domain=interfacer seinfo=platform name=projekt.interfacer type=system_app_data_file
-user=_app seinfo=themeservice name=org.cyanogenmod.themeservice domain=themeservice_app type=themeservice_app_data_file
