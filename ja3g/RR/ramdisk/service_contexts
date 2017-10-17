@@ -58,6 +58,7 @@ iphonesubinfo2                            u:object_r:radio_service:s0
 iphonesubinfo                             u:object_r:radio_service:s0
 ims                                       u:object_r:radio_service:s0
 imms                                      u:object_r:imms_service:s0
+interfacer                                u:object_r:interfacer_service:s0
 isms_msim                                 u:object_r:radio_service:s0
 isms2                                     u:object_r:radio_service:s0
 isms                                      u:object_r:radio_service:s0
@@ -131,7 +132,6 @@ task                                      u:object_r:task_service:s0
 telecom                                   u:object_r:telecom_service:s0
 telephony.registry                        u:object_r:registry_service:s0
 textservices                              u:object_r:textservices_service:s0
-themeinterfacer                           u:object_r:themeinterfacer_service:s0
 trust                                     u:object_r:trust_service:s0
 tv_input                                  u:object_r:tv_input_service:s0
 uimode                                    u:object_r:uimode_service:s0
@@ -149,13 +149,13 @@ wifiscanner                               u:object_r:wifiscanner_service:s0
 wifi                                      u:object_r:wifi_service:s0
 window                                    u:object_r:window_service:s0
 *                                         u:object_r:default_android_service:s0
-#line 1 "/home/chinmay/rr2/out/target/product/ja3gxx/obj/ETC/sectxfile_nl_intermediates/sectxfile_nl"
+#line 1 "/home/kongacute/RR/out/target/product/ja3gxx/obj/ETC/sectxfile_nl_intermediates/sectxfile_nl"
 
 #line 1 "device/samsung/ja3gxx/sepolicy/service_contexts"
 sensorhubservice                        u:object_r:sensorhub_service:s0
 #line 1 "device/samsung/exynos5410-common/sepolicy/service_contexts"
 Exynos.HWCService                            u:object_r:surfaceflinger_service:s0
-#line 1 "/home/chinmay/rr2/out/target/product/ja3gxx/obj/ETC/sectxfile_nl_intermediates/sectxfile_nl"
+#line 1 "/home/kongacute/RR/out/target/product/ja3gxx/obj/ETC/sectxfile_nl_intermediates/sectxfile_nl"
 
 #line 1 "vendor/cm/sepolicy/service_contexts"
 edgegestureservice                        u:object_r:edge_gesture_service:s0
@@ -175,5 +175,7 @@ cmlivelockscreen                          u:object_r:cm_livelockscreen_service:s
 cmweather                                 u:object_r:cm_weather_service:s0
 cmlivedisplay                             u:object_r:cm_livedisplay_service:s0               
 cmaudio                                   u:object_r:cm_audio_service:s0
-#line 1 "/home/chinmay/rr2/out/target/product/ja3gxx/obj/ETC/sectxfile_nl_intermediates/sectxfile_nl"
+pocket                                    u:object_r:pocket_service:s0
+theme                                     u:object_r:theme_service:s0
+#line 1 "/home/kongacute/RR/out/target/product/ja3gxx/obj/ETC/sectxfile_nl_intermediates/sectxfile_nl"
 
