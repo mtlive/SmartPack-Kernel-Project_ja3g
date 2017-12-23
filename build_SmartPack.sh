@@ -47,7 +47,7 @@ KERNEL_NAME="SmartPack-Kernel"
 KERNEL_VARIANT="ja3g"	# only one variant at a time
 			# Supported variants: ja3g, jalteskt & jaltelgt
 
-KERNEL_VERSION="beta"   # leave as such, if no specific version tag
+KERNEL_VERSION="final"   # leave as such, if no specific version tag
 
 KERNEL_DEFCONFIG="lineageos_@$KERNEL_VARIANT@_defconfig"
 
