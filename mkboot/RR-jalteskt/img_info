@@ -1,8 +1,8 @@
 kernel=kernel
 ramdisk=ramdisk
 page_size=2048
-kernel_size=3824536
-ramdisk_size=775999
+kernel_size=3827184
+ramdisk_size=775840
 base_addr=0x10000000
 kernel_offset=0x00008000
 ramdisk_offset=0x01000000
