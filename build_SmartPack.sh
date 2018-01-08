@@ -44,7 +44,7 @@ ARCHITECTURE="arm"
 
 KERNEL_NAME="SmartPack-Kernel"
 
-KERNEL_VARIANT="ja3g"	# only one variant at a time
+KERNEL_VARIANT="jalteskt"	# only one variant at a time
 			# Supported variants: ja3g, jalteskt & jaltelgt
 
 KERNEL_VERSION="final"   # leave as such, if no specific version tag
