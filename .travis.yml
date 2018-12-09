@@ -1,0 +1,75 @@
+sudo: required
+services:
+  - docker
+before_install:
+#- docker pull lineageos4microg/docker-lineage-cicd
+#- docker run -e "BRANCH_NAME=cm-11.0" -v "/home/user/lineage:/srv/src" -v "/home/user/zips:/srv/zips" -v "/home/user/logs:/srv/logs" -v "/home/user/cache:/srv/ccache" lineageos4microg/docker-lineage-cicd
+- docker pull ubuntu:latest
+- docker run --detach --name ubuntu --hostname med -v "$(pwd)":/home -u root ubuntu:latest sleep 6000
+- docker exec -u root ubuntu sh -c "apt-get update && apt-get install -y flex bison ncurses-dev texinfo gcc gperf patch libtool automake g++ libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev git sudo"
+language: c
+env: GCC_VERSION=7.x
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - flex
+#    - gcc-8 g++-8
+script:
+#- curl https://github.com/RR-msm7x30/samsung-kernel-msm7x30-common/commit/9d533762fe84a1fb1bcd3e55a4ed338617d8b536.patch | git am --3way  --exclude arch/arm/configs/ancora_defconfig #updates
+#- git remote add RR https://github.com/RR-msm7x30/samsung-kernel-msm7x30-common.git -b cm12.1
+#- git fetch RR
+#- git checkout cm-12.1
+#- git checkout -p RR/cm-12.1 drivers/media/video/msm/s5k4ecgx.c  drivers/media/video/msm/sr030pc30.c 
+#- git fetch --unshallow
+#- git reset --hard c465f68
+#- git checkout
+- sudo hostname med
+- curl https://github.com/mtlive/samsung-kernel-msm7x30/commit/9121461faa73def5937210b8c760147740fe5c6a.patch | git am #kernel update
+- curl https://github.com/mtlive/samsung-kernel-msm7x30/commit/d1d5602c46926d22fe2b46106b79acf704ff933a.patch | git am #kernel update
+- curl https://github.com/mtlive/samsung-kernel-msm7x30/commit/78656d2697300d856e40a4da410ccca00c16763f.patch | git am #gcc 5+ fix
+- curl https://github.com/torvalds/linux/commit/aeea3592a13bf12861943e44fc48f1f270941f8d.patch | git am #arm ftrace.h - gcc
+- curl https://github.com/mtlive/samsung-kernel-msm7x30/commit/393ab392648781c2d3351266537856bad113cebd.patch | git am #static methods for iommu sync lock and unlock - gcc
+# Install dependency
+- sudo apt-get install -y dpkg
+#- sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ xenial main"
+#- sudo apt-get update
+#- sudo apt-get install -qq make binutils g++-arm-linux-gnueabi  bison ncurses-dev texinfo gperf patch libtool automake libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1:i386 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev
+- sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ bionic main"
+#- wget http://ftp.br.debian.org/debian/pool/main/f/flex/libfl2_2.6.4-6.1_amd64.deb
+#- sudo dpkg -i libfl2_2.6.4-6.1_amd64.deb
+#- sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+- sudo apt-get update
+- sudo apt-get install -y libfl2
+# getting UberTC
+#- git clone --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-${GCC_VERSION}" "../arm-eabi-${GCC_VERSION}"
+- git clone https://github.com/USBhost/build-tools-gcc tc
+- make mrproper
+- travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 7 ; cd .."
+- ls -l tc/arm-linux-gnueabi/bin
+- export CROSS_COMPILE="${PWD}/tc/arm-linux-gnueabi/bin/arm-linux-gnueabi-"
+- export PATH=$PATH:"${PWD}/tc/arm-linux-gnueabi/bin/"
+- export ARCH=arm && export SUBARCH=arm
+#- make mrproper 
+#- make ancora_oc_exuv_defconfig 
+#- make -j4
+- sudo chmod --quiet -R 777 .
+- docker exec -u root ubuntu sh -c "hostname -f && useradd Mohammad -g root"
+- docker exec -e CROSS_COMPILE="/home/tc/arm-linux-gnueabi/bin/arm-linux-gnueabi-" -e ARCH=arm -e SUBARCH=arm -u Mohammad ubuntu sh -c "export PATH=$PATH:"/home/tc/arm-linux-gnueabi/bin/" && cd /home  && . build_SmartPack.sh "
+- find . -name "*.ko" -print | zip -j modules.zip -@
+# Export of zipfile to deploy
+#- export zipfile="${zipfile}"
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key: ${KEY}
+  file_glob: true
+  file: 
+    - "arch/${ARCH}/boot/zImage*"
+    - "modules.zip"
+  on:
+    tags: true
+    all_branches: true
+
