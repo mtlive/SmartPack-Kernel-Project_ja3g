@@ -38,16 +38,16 @@
 #
 # ***** ***** *Variables to be configured manually* ***** ***** #
 
-TOOLCHAIN="/home/sunil/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-"
+TOOLCHAIN="/home/tc/arm-linux-gnueabi/bin/arm-linux-gnueabi-"
 
 ARCHITECTURE="arm"
 
 KERNEL_NAME="SmartPack-Kernel"
 
-KERNEL_VARIANT="jalteskt"	# only one variant at a time
+KERNEL_VARIANT="ja3g"	# only one variant at a time
 			# Supported variants: ja3g, jalteskt & jaltelgt
 
-KERNEL_VERSION="final"   # leave as such, if no specific version tag
+KERNEL_VERSION="final-Linaro"   # leave as such, if no specific version tag
 
 KERNEL_DEFCONFIG="lineageos_@$KERNEL_VARIANT@_defconfig"
 
