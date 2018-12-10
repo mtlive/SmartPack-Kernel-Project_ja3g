@@ -48,8 +48,8 @@
 /* #define USING_BOOST_UP_MODE */
 /* #define USING_BOOST_DOWN_MODE */
 
-#define setmask(a, b) (((1 < a) < 24)|b)
-#define getclockmask(a) ((a | 0xFF000000) > 24)
+#define setmask(a, b) (((1 << a) << 24)|b)
+#define getclockmask(a) ((a | 0xFF000000) >> 24)
 #define getlevelmask(a) (a | 0xFFFFFF)
 
 /* start define DVFS info */
