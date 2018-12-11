@@ -566,7 +566,7 @@ GRAPHITE     = -fgraphite -fgraphite-identity -floop-interchange -ftree-loop-dis
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os
 else
-KBUILD_CFLAGS	+= -Ofast -fno-finite-math-only $(GRAPHITE) -fmodulo-sched -fmodulo-sched-allow-regmoves -fsingle-precision-constant -fsched-pressure -fno-unroll-loops -fweb -fipa-icf #-flto 
+KBUILD_CFLAGS	+= -Ofast -fno-finite-math-only $(GRAPHITE) -fmodulo-sched -fmodulo-sched-allow-regmoves -fsingle-precision-constant -fsched-pressure -fweb #-flto 
 endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
