@@ -38,7 +38,7 @@
 #
 # ***** ***** *Variables to be configured manually* ***** ***** #
 
-TOOLCHAIN="/home/tc/arm-linux-gnueabi/bin/arm-linux-gnueabi-"
+#TOOLCHAIN="/home/tc/arm-linux-gnueabi/bin/arm-linux-gnueabi-"
 
 ARCHITECTURE="arm"
 
@@ -62,7 +62,7 @@ COLOR_GREEN="\033[1;32m"
 COLOR_NEUTRAL="\033[0m"
 
 export ARCH=$ARCHITECTURE
-export CROSS_COMPILE="${CCACHE} $TOOLCHAIN"
+#export CROSS_COMPILE="${CCACHE} $TOOLCHAIN"
 
 if [ -z "$NUM_CPUS" ]; then
 	NUM_CPUS=`grep -c ^processor /proc/cpuinfo`
