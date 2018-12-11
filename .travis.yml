@@ -41,7 +41,7 @@ script:
 # getting UberTC
 #- git clone --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-${GCC_VERSION}" "../arm-eabi-${GCC_VERSION}"
 - git clone https://github.com/USBhost/build-tools-gcc tc
-- sed -i '237s/.*/                      ISL="isl-0.15" ;;/' tc/build
+- sed -i '237s/.*/                      ISL="isl-0.14" ;;/' tc/build
 - make mrproper
 - travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 4 ; cd .."
 - ls -l tc/arm-linux-gnueabi/bin
