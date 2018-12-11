@@ -52,7 +52,7 @@ script:
 #- make -j4
 - sudo chmod --quiet -R 777 .
 - docker exec -u root ubuntu sh -c "hostname -f && useradd Mohammad -g root"
-- docker exec -e CROSS_COMPILE="/home/arm-eabi-${GCC_VERSION}/bin/arm-linux-gnueabi-" -e ARCH=arm -e SUBARCH=arm -u Mohammad ubuntu sh -c "export PATH=$PATH:"/home/arm-eabi-${GCC_VERSION}/bin/" && cd /home  && ./build_SmartPack.sh "
+- docker exec -e CROSS_COMPILE="/home/arm-eabi-${GCC_VERSION}/bin/arm-eabi-" -e ARCH=arm -e SUBARCH=arm -u Mohammad ubuntu sh -c "export PATH=$PATH:"/home/arm-eabi-${GCC_VERSION}/bin/" && cd /home  && ./build_SmartPack.sh "
 #- find . -name "*.ko" -print | zip -j modules.zip -@
 # Export of zipfile to deploy
 #- export zipfile="${zipfile}"
