@@ -88,36 +88,17 @@ else
 		fi
 		make -C $(pwd) O=output_$KERNEL_VARIANT $KERNEL_DEFCONFIG && make -j$NUM_CPUS -C $(pwd) O=output_$KERNEL_VARIANT
 		if [ -e output_$KERNEL_VARIANT/arch/arm/boot/zImage ]; then
-			if [ ! -d "mkboot/LOS-$KERNEL_VARIANT/" ]; then
-				echo -e $COLOR_GREEN"\n Excluding Lineage-OS\n"$COLOR_NEUTRAL
-			else				
-				cp output_$KERNEL_VARIANT/arch/arm/boot/zImage mkboot/LOS-$KERNEL_VARIANT/kernel
-				echo -e $COLOR_GREEN"\n Generating boot.img for Lineage-OS\n"$COLOR_NEUTRAL
-				cd mkboot/
-				perl mkboot LOS-$KERNEL_VARIANT/ ../recovery-zip_SmartPack/boot.img
-				echo -e $COLOR_GREEN"\n Making recovery flashable zip for Lineage-OS\n"$COLOR_NEUTRAL
+				mkdir recovery-zip_SmartPack/mkboot			
+				cp output_$KERNEL_VARIANT/arch/arm/boot/zImage recovery-zip_SmartPack/mkboot/
+				#echo -e $COLOR_GREEN"\n Generating kernel installer zip\n"$COLOR_NEUTRAL
+				cp -R mkboot/ARM/ recovery-zip_SmartPack/mkboot/
+				echo -e $COLOR_GREEN"\n Making recovery flashable zip\n"$COLOR_NEUTRAL
 				cd ../recovery-zip_SmartPack/
-				zip -r9 $KERNEL_NAME-$KERNEL_VARIANT-LOS-$KERNEL_VERSION-$KERNEL_DATE.zip *  
+				zip -r9 $KERNEL_NAME-$KERNEL_VARIANT-$KERNEL_VERSION-$KERNEL_DATE.zip *  
 				mv $KERNEL_NAME* ../release_SmartPack/
-				rm boot.img
 				cd ../
-				rm mkboot/LOS-$KERNEL_VARIANT/kernel
-			fi
-			if [ ! -d "mkboot/RR-$KERNEL_VARIANT/" ]; then
-				echo -e $COLOR_GREEN"\n Excluding Resurrection Remix-OS\n"$COLOR_NEUTRAL
-			else
-				cp output_$KERNEL_VARIANT/arch/arm/boot/zImage mkboot/RR-$KERNEL_VARIANT/kernel
-				echo -e $COLOR_GREEN"\n Generating boot.img for Resurrection Remix-OS\n"$COLOR_NEUTRAL
-				cd mkboot/
-				perl mkboot RR-$KERNEL_VARIANT/ ../recovery-zip_SmartPack/boot.img
-				echo -e $COLOR_GREEN"\n Making recovery flashable zip for Resurrection Remix-OS\n"$COLOR_NEUTRAL
-				cd ../recovery-zip_SmartPack/
-				zip -r9 $KERNEL_NAME-$KERNEL_VARIANT-RR-$KERNEL_VERSION-$KERNEL_DATE.zip * 
-				mv $KERNEL_NAME* ../release_SmartPack/
-				rm boot.img
-				cd ../
-				rm mkboot/RR-$KERNEL_VARIANT/kernel
-			fi
+				rm -R recovery-zip_SmartPack/mkboot
+			
 			echo -e $COLOR_GREEN"\n Restoring backups\n"$COLOR_NEUTRAL
 			mv release_SmartPack/mkcompile_h scripts/
 			echo -e $COLOR_GREEN"\n Everything done... please visit 'release_SmartPack'\n"$COLOR_NEUTRAL
