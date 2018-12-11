@@ -43,7 +43,7 @@ script:
 - git clone https://github.com/USBhost/build-tools-gcc tc
 - sed -i '237s/.*/                      ISL="isl-0.15" ;;/' tc/build
 - make mrproper
-- travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 4 -V ; cd .."
+- travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 4 ; cd .."
 - ls -l tc/arm-linux-gnueabi/bin
 - export CROSS_COMPILE="${PWD}/tc/arm-linux-gnueabi/bin/arm-linux-gnueabi-"
 - export PATH=$PATH:"${PWD}/tc/arm-linux-gnueabi/bin/"
