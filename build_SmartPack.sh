@@ -93,7 +93,7 @@ else
 				#echo -e $COLOR_GREEN"\n Generating kernel installer zip\n"$COLOR_NEUTRAL
 				cp -R mkboot/ARM/ recovery-zip_SmartPack/mkboot/
 				echo -e $COLOR_GREEN"\n Making recovery flashable zip\n"$COLOR_NEUTRAL
-				cd ../recovery-zip_SmartPack/
+				cd recovery-zip_SmartPack/
 				zip -r9 $KERNEL_NAME-$KERNEL_VARIANT-$KERNEL_VERSION-$KERNEL_DATE.zip *  
 				mv $KERNEL_NAME* ../release_SmartPack/
 				cd ../
