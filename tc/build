@@ -522,7 +522,7 @@ function build_binutils() {
     ../binutils/configure "${CONFIGURATION[@]}" \
                           --target=${TARGET} \
                           --prefix="${INSTALL}" \
-                          --disable-gdb --with-cloog=${CLOOG} --with-isl=${ROOT}/${ISL} 
+                          --disable-gdb --with-cloog=${CLOOG} --with-isl
     make ${JOBS} || die "Error while building binutils!" -n
     make install ${JOBS} || die "Error while installing binutils!" -n
 }
@@ -545,7 +545,7 @@ function build_gcc() {
     ../gcc/configure "${CONFIGURATION[@]}" \
                      --enable-languages=c \
                      --target=${TARGET} \
-                     --prefix="${INSTALL}" --with-cloog=${CLOOG} --with-isl=${ROOT}/${ISL} 
+                     --prefix="${INSTALL}" --with-cloog=${CLOOG} --with-isl
     make all-gcc ${JOBS} || die "Error while building gcc!" -n
     make install-gcc ${JOBS} || die "Error while installing gcc!" -n
     if [[ ${ARCH} = "x86_64" ]]; then
