@@ -370,7 +370,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Wno-format-security -Wno-unused \
 		   -fno-delete-null-pointer-checks \
    		   -march=armv7-a \
-   		   -mtune=cortex-a15.cortex-a7 \
+   		   -mtune=cortex-a7 \
  		   -mfpu=neon-vfpv4 -mvectorize-with-neon-quad \
 		   -mfloat-abi=hard \
    		   -std=gnu89  
