@@ -86,7 +86,7 @@ else
 		else
 			mkdir output_$KERNEL_VARIANT
 		fi
-		make -C $(pwd) O=output_$KERNEL_VARIANT $KERNEL_DEFCONFIG && make -j$NUM_CPUS -C $(pwd) O=output_$KERNEL_VARIANT V=1
+		make -C $(pwd) O=output_$KERNEL_VARIANT $KERNEL_DEFCONFIG && make -j$NUM_CPUS -C $(pwd) O=output_$KERNEL_VARIANT
 		if [ -e output_$KERNEL_VARIANT/arch/arm/boot/zImage ]; then
 				mkdir recovery-zip_SmartPack/mkboot			
 				cp output_$KERNEL_VARIANT/arch/arm/boot/zImage recovery-zip_SmartPack/mkboot/
