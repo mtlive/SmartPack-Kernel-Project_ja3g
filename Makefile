@@ -372,6 +372,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
    		   -march=armv7-a \
    		   -mtune=cortex-a15.cortex-a7 \
  		   -mfpu=neon-vfpv4 \
+		   -mfloat-abi=hard \
    		   -std=gnu89  
 
 KBUILD_AFLAGS_KERNEL :=
