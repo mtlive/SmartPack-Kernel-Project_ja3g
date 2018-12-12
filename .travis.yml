@@ -6,6 +6,7 @@ before_install:
 #- docker run -e "BRANCH_NAME=cm-11.0" -v "/home/user/lineage:/srv/src" -v "/home/user/zips:/srv/zips" -v "/home/user/logs:/srv/logs" -v "/home/user/cache:/srv/ccache" lineageos4microg/docker-lineage-cicd
 - docker run --detach --name ubuntu --hostname med -v "$(pwd)":/home -u root ubuntu:xenial sleep 6000
 - docker exec -u root ubuntu sh -c "apt-get update && apt-get install -y flex bison ncurses-dev texinfo gcc gperf patch libtool automake g++ libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev git sudo zip libfl2"
+- docker exec -u root ubuntu sh -c "wget http://mirrors.xmission.com/ubuntu/pool/main/f/flex/libfl2_2.6.4-6_amd64.deb; sudo dpkg -i libfl2_2.6.4-6.1_amd64.deb"
 language: c
 env: GCC_VERSION=4.9
 addons:
@@ -31,7 +32,7 @@ script:
 #- sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ xenial main"
 #- sudo apt-get update
 #- sudo apt-get install -qq make binutils g++-arm-linux-gnueabi  bison ncurses-dev texinfo gperf patch libtool automake libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1:i386 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev
-- sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ bionic main"
+#- sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ bionic main"
 #- wget http://ftp.br.debian.org/debian/pool/main/f/flex/libfl2_2.6.4-6.1_amd64.deb
 #- sudo dpkg -i libfl2_2.6.4-6.1_amd64.deb
 #- sudo add-apt-repository ppa:ubuntu-toolchain-r/test
