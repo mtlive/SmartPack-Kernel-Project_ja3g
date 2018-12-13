@@ -144,6 +144,7 @@ ENTRY(cpu_v7_do_resume)
 	ldrne	r0, =SMC_CMD_REG
 	ldrne	r1, =SMC_REG_ID_CP15(1, 0, 0, 1)
 	movne	r2, r9
+	.arch_extension sec
 	smcne	0
 #else
 	mcrne	p15, 0, r9, c1, c0, 1	@ No, so write it
@@ -292,6 +293,7 @@ __v7_setup:
 	ldreq	r0, =SMC_CMD_REG
 	ldreq	r1, =SMC_REG_ID_CP15(1, 0, 0, 1)
 	moveq	r2, r10
+	.arch_extension sec
 	smceq	0
 #else
 	mcreq	p15, 0, r10, c1, c0, 1		@ write aux control register
@@ -305,6 +307,7 @@ __v7_setup:
 	ldreq	r0, =SMC_CMD_REG
 	ldreq	r1, =SMC_REG_ID_CP15(1, 0, 0, 1)
 	moveq	r2, r10
+	.arch_extension sec
 	smceq	0
 #else
 	mcreq	p15, 0, r10, c1, c0, 1		@ write aux control register
