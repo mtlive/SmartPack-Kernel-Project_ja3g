@@ -4,11 +4,11 @@ services:
 before_install:
 #- docker pull lineageos4microg/docker-lineage-cicd
 #- docker run -e "BRANCH_NAME=cm-11.0" -v "/home/user/lineage:/srv/src" -v "/home/user/zips:/srv/zips" -v "/home/user/logs:/srv/logs" -v "/home/user/cache:/srv/ccache" lineageos4microg/docker-lineage-cicd
-- docker pull ubuntu:latest
-- docker run --detach --name ubuntu --hostname med -v "$(pwd)":/home -u root ubuntu:latest sleep 6000
-- docker exec -u root ubuntu sh -c "apt-get update && apt-get install -y flex bison ncurses-dev texinfo gcc gperf patch libtool automake g++ libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev git sudo zip libisl-0.18-dev"
+- docker run --detach --name ubuntu --hostname med -v "$(pwd)":/home -u root ubuntu:xenial sleep 6000
+- docker exec -u root ubuntu sh -c "apt-get update && apt-get install -y flex bison ncurses-dev texinfo gcc gperf patch libtool automake g++ libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev git sudo zip software-properties-common python-software-properties"
+- docker exec -u root ubuntu sh -c "sudo add-apt-repository -s 'deb http://us.archive.ubuntu.com/ubuntu/ bionic main'; sudo apt-get update; sudo apt-get install -y libfl2"
 language: c
-env: GCC_VERSION=7.x
+env: GCC_VERSION=4.9
 addons:
   apt:
     sources:
@@ -28,35 +28,32 @@ script:
 - sudo hostname med
 - curl https://github.com/mtlive/samsung-kernel-msm7x30/commit/78656d2697300d856e40a4da410ccca00c16763f.patch | git am #gcc 5+ fix
 # Install dependency
-- sudo apt-get install -y dpkg
+#- sudo apt-get install -y dpkg
 #- sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ xenial main"
 #- sudo apt-get update
 #- sudo apt-get install -qq make binutils g++-arm-linux-gnueabi  bison ncurses-dev texinfo gperf patch libtool automake libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1:i386 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev
-- sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ bionic main"
 #- wget http://ftp.br.debian.org/debian/pool/main/f/flex/libfl2_2.6.4-6.1_amd64.deb
 #- sudo dpkg -i libfl2_2.6.4-6.1_amd64.deb
 #- sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-- sudo apt-get update
-- sudo apt-get install -y libfl2
+#- sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ bionic main"
+#- sudo apt-get update
+#- sudo apt-get install -y libfl2
 # getting UberTC
-#- git clone --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-${GCC_VERSION}" "../arm-eabi-${GCC_VERSION}"
+- mkdir "arm-eabi-${GCC_VERSION}"
+- svn checkout https://github.com/Christopher83/linaro_toolchains_2014/branches/2014.11/arm-linux-gnueabi-linaro_4.8.4-2014.11/ "arm-eabi-${GCC_VERSION}"
 #- git clone https://github.com/USBhost/build-tools-gcc tc
-- make mrproper
-- sudo chmod --quiet -R 777 tc
-- travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 4 -V ; cd .."
-- ls tc/
-- ls -R tc/i*
-#- cat tc/build-gcc/config.log
-- ls -l tc/arm-linux-gnueabi/bin
-- export CROSS_COMPILE="${PWD}/tc/arm-linux-gnueabi/bin/arm-linux-gnueabi-"
-- export PATH=$PATH:"${PWD}/tc/arm-linux-gnueabi/bin/"
+#- make mrproper
+#- travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 4 -V ; cd .."
+#- ls -l tc/arm-linux-gnueabi/bin
+- export CROSS_COMPILE="${PWD}/arm-eabi-${GCC_VERSION}/bin/arm-abi-"
+- export PATH=$PATH:"${PWD}/arm-eabi-${GCC_VERSION}/bin/"
 - export ARCH=arm && export SUBARCH=arm
 #- make mrproper 
 #- make ancora_oc_exuv_defconfig 
 #- make -j4
 - sudo chmod --quiet -R 777 .
 - docker exec -u root ubuntu sh -c "hostname -f && useradd Mohammad -g root"
-- docker exec -e CROSS_COMPILE="/home/tc/arm-linux-gnueabi/bin/arm-linux-gnueabi-" -e ARCH=arm -e SUBARCH=arm -u Mohammad ubuntu sh -c "export PATH=$PATH:"/home/tc/arm-linux-gnueabi/bin/" && cd /home  && ./build_SmartPack.sh "
+- docker exec -e CROSS_COMPILE="/home/arm-eabi-${GCC_VERSION}/bin/arm-eabi-" -e ARCH=arm -e SUBARCH=arm -u Mohammad ubuntu sh -c "export PATH=$PATH:"/home/arm-eabi-${GCC_VERSION}/bin/" && cd /home  && ./build_SmartPack.sh "
 #- find . -name "*.ko" -print | zip -j modules.zip -@
 # Export of zipfile to deploy
 #- export zipfile="${zipfile}"
