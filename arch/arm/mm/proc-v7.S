@@ -30,7 +30,7 @@
 #endif
 
 
-.arch_extension sec #Error: selected processor does not support `smceq 0' in ARM mode
+.arch_extension sec
 
 ENTRY(cpu_v7_proc_init)
 	mov	pc, lr
