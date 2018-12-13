@@ -10,7 +10,6 @@
  *  This is the "shell" of the ARMv7 processor support.
  */
  
-asm(".arch_extension sec\n\t");
 
 #include <linux/init.h>
 #include <linux/linkage.h>
