@@ -40,11 +40,10 @@ script:
 #- sudo apt-get install -y libfl2
 # getting UberTC
 #- mkdir "arm-eabi-${GCC_VERSION}"
-- git clone https://github.com/Christopher83/arm-cortex-linux-gnueabi-linaro_4.9.git --depth 1 "arm-eabi-${GCC_VERSION}"
-#- git clone https://github.com/USBhost/build-tools-gcc tc
-#- make mrproper
-#- travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 4 -V ; cd .."
-#- ls -l tc/arm-linux-gnueabi/bin
+#- git clone https://github.com/Christopher83/arm-cortex-linux-gnueabi-linaro_4.9.git --depth 1 "arm-eabi-${GCC_VERSION}"
+- git clone https://github.com/USBhost/build-tools-gcc tc
+- make mrproper
+- travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 5 ; cd .."
 - export CROSS_COMPILE="${PWD}/arm-eabi-${GCC_VERSION}/bin/arm-abi-"
 - export PATH=$PATH:"${PWD}/arm-eabi-${GCC_VERSION}/bin/"
 - export ARCH=arm && export SUBARCH=arm
@@ -53,7 +52,7 @@ script:
 #- make -j4
 - sudo chmod --quiet -R 777 .
 - docker exec -u root ubuntu sh -c "hostname -f && useradd Mohammad -g root"
-- docker exec -e CROSS_COMPILE="/home/arm-eabi-${GCC_VERSION}/bin/arm-eabi-" -e ARCH=arm -e SUBARCH=arm -u Mohammad ubuntu sh -c "export PATH=$PATH:"/home/arm-eabi-${GCC_VERSION}/bin/" && cd /home  && ./build_SmartPack.sh "
+- docker exec -e CROSS_COMPILE="/home/tc/arm-linux-gnueabi/bin/arm-linux-gnueabi-" -e ARCH=arm -e SUBARCH=arm -u Mohammad ubuntu sh -c "export PATH=$PATH:"/home/tc/arm-linux-gnueabi/bin/" && cd /home  && ./build_SmartPack.sh "
 #- find . -name "*.ko" -print | zip -j modules.zip -@
 # Export of zipfile to deploy
 #- export zipfile="${zipfile}"
