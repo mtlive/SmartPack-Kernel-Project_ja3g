@@ -40,7 +40,7 @@ script:
 #- sudo apt-get install -y libfl2
 # getting UberTC
 - mkdir "arm-eabi-${GCC_VERSION}"
-- svn checkout https://github.com/Christopher83/linaro_toolchains_2014/branches/2014.11/arm-linux-gnueabi-linaro_4.8.4-2014.11/ "arm-eabi-${GCC_VERSION}"
+- svn checkout https://github.com/Christopher83/linaro_toolchains_2014/branches/2014.12/arm-linux-gnueabi-linaro_4.9.3-2014.12/ "arm-eabi-${GCC_VERSION}"
 #- git clone https://github.com/USBhost/build-tools-gcc tc
 #- make mrproper
 #- travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 4 -V ; cd .."
