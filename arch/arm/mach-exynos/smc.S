@@ -10,6 +10,8 @@
 #include <linux/init.h>
 #include <mach/smc.h>
 
+.arch_extension sec
+
 ENTRY(exynos_smc)
 	stmfd	sp!, {lr}
 #if defined(CONFIG_ARM_ERRATA_766421)
