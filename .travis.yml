@@ -30,8 +30,8 @@ script:
 # Install dependency
 #- sudo apt-get install -y dpkg
 #- sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ xenial main"
-- sudo apt-get update
-- sudo apt-get install -qq svn #make binutils g++-arm-linux-gnueabi  bison ncurses-dev texinfo gperf patch libtool automake libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1:i386 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev
+#- sudo apt-get update
+#- sudo apt-get install -qq make binutils g++-arm-linux-gnueabi  bison ncurses-dev texinfo gperf patch libtool automake libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1:i386 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev
 #- wget http://ftp.br.debian.org/debian/pool/main/f/flex/libfl2_2.6.4-6.1_amd64.deb
 #- sudo dpkg -i libfl2_2.6.4-6.1_amd64.deb
 #- sudo add-apt-repository ppa:ubuntu-toolchain-r/test
@@ -39,8 +39,8 @@ script:
 #- sudo apt-get update
 #- sudo apt-get install -y libfl2
 # getting UberTC
-- mkdir "arm-eabi-${GCC_VERSION}"
-- svn checkout https://github.com/Christopher83/linaro_toolchains_2014/branches/2014.12/arm-linux-gnueabi-linaro_4.9.3-2014.12/ "arm-eabi-${GCC_VERSION}"
+#- mkdir "arm-eabi-${GCC_VERSION}"
+- git clone https://github.com/Christopher83/linaro_toolchains_2014 --branch=2014.12 --shallow "arm-eabi-${GCC_VERSION}"
 #- git clone https://github.com/USBhost/build-tools-gcc tc
 #- make mrproper
 #- travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 4 -V ; cd .."
