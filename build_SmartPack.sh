@@ -76,8 +76,8 @@ else
 		# creating backups
 		cp scripts/mkcompile_h release_SmartPack/
 		# updating kernel name
-		sed "s/\`echo \$LINUX_COMPILE_BY | \$UTS_TRUNCATE\`/$KERNEL_NAME-$KERNEL_VARIANT-[sunilpaulmathew/g" -i scripts/mkcompile_h
-		sed "s/\`echo \$LINUX_COMPILE_HOST | \$UTS_TRUNCATE\`/xda-developers.com]/g" -i scripts/mkcompile_h
+		#sed "s/\`echo \$LINUX_COMPILE_BY | \$UTS_TRUNCATE\`/$KERNEL_NAME-$KERNEL_VARIANT-[sunilpaulmathew/g" -i scripts/mkcompile_h
+		#sed "s/\`echo \$LINUX_COMPILE_HOST | \$UTS_TRUNCATE\`/xda-developers.com]/g" -i scripts/mkcompile_h
 		if [ -e output_$KERNEL_VARIANT/.config ]; then
 			rm -f output_$KERNEL_VARIANT/.config
 			if [ -e output_$KERNEL_VARIANT/arch/arm/boot/zImage ]; then
@@ -88,10 +88,11 @@ else
 		fi
 		make -C $(pwd) O=output_$KERNEL_VARIANT $KERNEL_DEFCONFIG && make -j$NUM_CPUS -C $(pwd) O=output_$KERNEL_VARIANT
 		if [ -e output_$KERNEL_VARIANT/arch/arm/boot/zImage ]; then
-				mkdir recovery-zip_SmartPack/mkboot			
+				stat output_$KERNEL_VARIANT/arch/arm/boot/zImage
+#				mkdir recovery-zip_SmartPack/mkboot			
 				cp output_$KERNEL_VARIANT/arch/arm/boot/zImage recovery-zip_SmartPack/mkboot/
 				#echo -e $COLOR_GREEN"\n Generating kernel installer zip\n"$COLOR_NEUTRAL
-				cp -R mkboot/ARM/ recovery-zip_SmartPack/mkboot/
+				cp -R mkboot/ARM/. recovery-zip_SmartPack/mkboot/
 				echo -e $COLOR_GREEN"\n Making recovery flashable zip\n"$COLOR_NEUTRAL
 				cd recovery-zip_SmartPack/
 				zip -r9 $KERNEL_NAME-$KERNEL_VARIANT-$KERNEL_VERSION-$KERNEL_DATE.zip *  
