@@ -4,22 +4,25 @@ ui_print("");
 package_extract_dir("mkboot", "/tmp");
 ui_print("Setting permissions...");
 set_progress(0.1);
-set_perm(0, 0, 0777, "/tmp/*");
+set_perm_recursive(0, 0, 0777, 0777, "/tmp");
 run_program("/sbin/busybox", "dd",
-"if=/dev/block/mmcblk0p9","of=/tmp/boot.img");
-set_progress(0.4);
-ui_print("Unpacking your boot.img...");
-run_program("/tmp/mkboot", "/tmp/boot.img", "/tmp/bootfolder");
-run_program("mv", "/tmp/zImage", "/tmp/bootfolder/");
-set_progress(0.7);
-ui_print("Repacking new boot.img...");
-run_program("/tmp/mkboot", "/tmp/bootfolder", "/tmp/newboot.img");
+"if=/dev/block/platform/dw_mmc.0/by-name/BOOT","of=/tmp/boot.img");
+set_progress(0.2);
+ui_print("Unpacking original boot.img...");
+run_program("/tmp/update-boot.sh");
 set_progress(0.8);
-ui_print("Flahing kernel...");
-package_extract_file("/tmp/newboot.img", "/dev/block/platform/dw_mmc.0/by-name/BOOT");
-ui_print("Installation Completed!");
-set_progress(0.9);
-ui_print("######################");
-ui_print("#    Done! Enjoy!    #");
-ui_print("######################");
-set_progress(1.0);
+if
+  sha1_check(read_file("/tmp/bootfolder/newboot.img")) != ""
+then
+  ui_print("Flahing new boot image...");
+  run_program("/sbin/busybox", "dd", "if=/tmp/bootfolder/newboot.img","of=/dev/block/platform/dw_mmc.0/by-name/BOOT");
+  set_progress(1.0);
+  ui_print("Installation Completed!");
+  ui_print("######################");
+  ui_print("#    Done! Enjoy!    #");
+  ui_print("######################");
+else
+ui_print("Creating boot image failed!");
+ui_print("Installation Failed!");
+endif;
+
