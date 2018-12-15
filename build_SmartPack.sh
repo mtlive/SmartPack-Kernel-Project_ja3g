@@ -93,6 +93,8 @@ else
 				cp output_$KERNEL_VARIANT/arch/arm/boot/zImage recovery-zip_SmartPack/mkboot/
 				#echo -e $COLOR_GREEN"\n Generating kernel installer zip\n"$COLOR_NEUTRAL
 				cp -R mkboot/ARM/. recovery-zip_SmartPack/mkboot/
+				mkdir -p recovery-zip_SmartPack/mkboot/synapse/res/ && cp -r mkboot/LOS-ja3g/ramdisk/res/synapse "$_"
+ 				mkdir -p recovery-zip_SmartPack/mkboot/synapse/res/sbin/ && cp mkboot/LOS-ja3g/ramdisk/res/synapse/sbin/uci "$_"
 				echo -e $COLOR_GREEN"\n Making recovery flashable zip\n"$COLOR_NEUTRAL
 				cd recovery-zip_SmartPack/
 				zip -r9 $KERNEL_NAME-$KERNEL_VARIANT-$KERNEL_VERSION-$KERNEL_DATE.zip *  
