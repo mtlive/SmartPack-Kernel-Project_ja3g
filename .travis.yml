@@ -17,7 +17,7 @@ addons:
     - flex
 #    - gcc-8 g++-8
 script:
-#- curl https://github.com/RR-msm7x30/samsung-kernel-msm7x30-common/commit/9d533762fe84a1fb1bcd3e55a4ed338617d8b536.patch | git am --3way  --exclude arch/arm/configs/ancora_defconfig #updates
+- curl https://github.com/duki994/g900h_mm_kernel/commit/01a9144bd61db20d0078916c9c580d7ac52e1971.patch | git am --3way  
 #- git remote add RR https://github.com/RR-msm7x30/samsung-kernel-msm7x30-common.git -b cm12.1
 #- git fetch RR
 #- git checkout cm-12.1
