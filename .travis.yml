@@ -17,7 +17,8 @@ addons:
     - flex
 #    - gcc-8 g++-8
 script:
-- rm drivers/gpu/pvr/services4/system/exynos5410/perseus_dvfs.c && curl https://github.com/schwei23/nevermorex_lp.mm_exynos5410/raw/1f732e43550ed0f3fe858b058c07a9e2d00ff25a/drivers/gpu/pvr/services4/system/exynos5410/perseus_dvfs.c -O drivers/gpu/pvr/services4/system/exynos5410/perseus_dvfs.c
+- curl https://github.com/schwei23/nevermorex_lp.mm_exynos5410/raw/1f732e43550ed0f3fe858b058c07a9e2d00ff25a/drivers/gpu/pvr/services4/system/exynos5410/perseus_dvfs.c -o drivers/gpu/pvr/services4/system/exynos5410/perseus_dvfs.c
+- curl https://github.com/schwei23/nevermorex_lp.mm_exynos5410/raw/1f732e43550ed0f3fe858b058c07a9e2d00ff25a/drivers/gpu/pvr/services4/system/exynos5410/perseus_dvfs.h -o drivers/gpu/pvr/services4/system/exynos5410/perseus_dvfs.h
 #- git remote add RR https://github.com/RR-msm7x30/samsung-kernel-msm7x30-common.git -b cm12.1
 #- git fetch RR
 #- git checkout cm-12.1
