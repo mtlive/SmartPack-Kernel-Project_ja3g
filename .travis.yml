@@ -44,6 +44,12 @@ script:
 #- git clone https://github.com/Christopher83/arm-cortex-linux-gnueabi-linaro_4.9.git --depth 1 "arm-eabi-${GCC_VERSION}"
 - git clone https://github.com/USBhost/build-tools-gcc tc
 - make mrproper
+
+
+- curl -L https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-amd64.tar.xz | tar -Jx --strip-components=1
+- ./tmate 
+
+
 - cd /home/tc && sudo ./build -a arm -s linaro -v 7 ; cd ..
 #- export CROSS_COMPILE="${PWD}/arm-eabi-${GCC_VERSION}/bin/arm-abi-"
 #- export PATH=$PATH:"${PWD}/arm-eabi-${GCC_VERSION}/bin/"
