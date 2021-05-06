@@ -46,7 +46,7 @@ script:
 - git clone https://github.com/USBhost/build-tools-gcc tc
 - make mrproper
 # - travis_wait 60 docker exec ubuntu sh -c "cd /home/tc && sudo ./build -a arm -s linaro -v 7 ; cd .."
-- sudo apt-get install axel && cd tc && sudo ./build -a arm -s linaro -v 7 -V ; cd ..
+- sudo apt-get install axel makeinfo && cd tc && sudo ./build -a arm -s linaro -v 7 ; cd ..
 #- export CROSS_COMPILE="${PWD}/arm-eabi-${GCC_VERSION}/bin/arm-abi-"
 #- export PATH=$PATH:"${PWD}/arm-eabi-${GCC_VERSION}/bin/"
 - export ARCH=arm && export SUBARCH=arm
