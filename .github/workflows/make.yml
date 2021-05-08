@@ -3,6 +3,9 @@ name: C/C++ CI
 on:
   push:
     branches: [ aosp+tc+pewq ]
+  release:
+    types:
+      - published
 
 jobs:
   build:
@@ -10,14 +13,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - uses: actions/cache@v2
+      id: cache
+      with:
+        path: tc
+        key: ${{ runner.os }}-${{ hashFiles('**/arm-linux-gnueabi-*') }}
+
+    - name: Install Dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        git clone https://github.com/USBhost/build-tools-gcc tc
+        sudo apt-get install  -y flex bison ncurses-dev texinfo gcc gperf patch libtool automake g++ libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev git sudo zip software-properties-common axel 
+        cd tc && sudo ./build -a arm -s linaro -v 7 ; cd ..
+    
     - uses: actions/checkout@v2
     - name: configure
       run: |
         sudo hostname med
         curl https://github.com/mtlive/samsung-kernel-msm7x30/commit/78656d2697300d856e40a4da410ccca00c16763f.patch | git am #gcc 5+ fix
-        git clone https://github.com/USBhost/build-tools-gcc tc
-        sudo apt-get install  -y flex bison ncurses-dev texinfo gcc gperf patch libtool automake g++ libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev git sudo zip software-properties-common axel 
-        cd tc && sudo ./build -a arm -s linaro -v 7 ; cd ..
+
         export ARCH=arm && export SUBARCH=arm
         sudo chmod --quiet -R 777 .
         docker exec -u root ubuntu sh -c "hostname -f && useradd Mohammad -g root"
